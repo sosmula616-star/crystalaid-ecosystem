@@ -13,14 +13,32 @@ export function createCrystalEmbed(title: string, description: string): EmbedBui
     .setTimestamp();
 }
 
+const DEFAULT_ACTIVITY_URL = 'https://noievroninoravoniaseofioerfovarnoonvavraonirvwjifvediopnosdvonWEFPJQ.bothost.tech';
+
+export function getSanitizedAppUrl(): string {
+  let rawUrl = (process.env.APP_URL || process.env.APP_DOMAIN || DEFAULT_ACTIVITY_URL).trim();
+  rawUrl = rawUrl.replace(/^["']|["']$/g, '').trim();
+
+  if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
+    rawUrl = `https://${rawUrl}`;
+  }
+
+  try {
+    const parsed = new URL(rawUrl);
+    return parsed.toString();
+  } catch {
+    return DEFAULT_ACTIVITY_URL;
+  }
+}
+
 export function createActivityLaunchButton(): ActionRowBuilder<ButtonBuilder> {
-  const appUrl = process.env.APP_URL || 'https://noievroninoravoniaseofioerfovarnoonvavraonirvwjifvediopnosdvonWEFPJQ.bothost.tech';
+  const validUrl = getSanitizedAppUrl();
 
   const launchBtn = new ButtonBuilder()
     .setLabel('Launch CrystalAid Activity')
     .setEmoji('💎')
     .setStyle(ButtonStyle.Link)
-    .setURL(appUrl);
+    .setURL(validUrl);
 
   const statsBtn = new ButtonBuilder()
     .setCustomId('btn_quick_stats')

@@ -56,7 +56,7 @@ async function handleCommand(interaction) {
         });
         if (!dbUser || !dbUser.guildMembers[0]) {
             const embed = (0, crystalEmbed_1.createCrystalEmbed)('Profile Not Found', `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`);
-            return interaction.reply({ embeds: [embed], ephemeral: true });
+            return interaction.reply({ embeds: [embed], flags: discord_js_1.MessageFlags.Ephemeral });
         }
         const member = dbUser.guildMembers[0];
         const prog = (0, config_1.calculateLevelProgression)(member.xp);
@@ -102,7 +102,7 @@ async function handleCommand(interaction) {
             return interaction.reply({
                 embeds: [embed],
                 components: [(0, crystalEmbed_1.createActivityLaunchButton)()],
-                ephemeral: true,
+                flags: discord_js_1.MessageFlags.Ephemeral,
             });
         }
         const member = dbUser.guildMembers[0];
@@ -113,7 +113,7 @@ async function handleCommand(interaction) {
         if (diff < cooldownMs && commandName === 'daily') {
             const remainingHours = Math.ceil((cooldownMs - diff) / (3600 * 1000));
             const embed = (0, crystalEmbed_1.createCrystalEmbed)('Daily Reward on Cooldown', `You have already claimed your daily reward! Please return in approx. **${remainingHours} hours**.`);
-            return interaction.reply({ embeds: [embed], ephemeral: true });
+            return interaction.reply({ embeds: [embed], flags: discord_js_1.MessageFlags.Ephemeral });
         }
         const embed = (0, crystalEmbed_1.createCrystalEmbed)('Daily Crystal Rewards', `**Current Streak:** 🔥 **${member.currentStreak} Days**\n\nDaily claim resets every 20 hours with streak preservation up to 48 hours.`);
         embed.addFields({ name: 'Claim Status', value: diff >= cooldownMs ? '✅ Ready to Claim!' : '⏳ On Cooldown', inline: true }, { name: 'Next Reward', value: '+80 Crystals • +150 XP', inline: true });
@@ -140,6 +140,6 @@ async function handleCommand(interaction) {
         });
     }
     // Fallback
-    return interaction.reply({ content: 'Command processed.', ephemeral: true });
+    return interaction.reply({ content: 'Command processed.', flags: discord_js_1.MessageFlags.Ephemeral });
 }
 //# sourceMappingURL=index.js.map

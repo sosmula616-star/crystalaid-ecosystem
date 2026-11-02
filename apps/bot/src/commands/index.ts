@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
+import { SlashCommandBuilder, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
 import { prisma } from '@crystalaid/database';
 import { calculateLevelProgression, APP_CONFIG } from '@crystalaid/config';
 import { createCrystalEmbed, createActivityLaunchButton } from '../embeds/crystalEmbed';
@@ -76,7 +76,7 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
         'Profile Not Found',
         `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`
       );
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
 
     const member = dbUser.guildMembers[0];
@@ -147,7 +147,7 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
       return interaction.reply({
         embeds: [embed],
         components: [createActivityLaunchButton()],
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -163,7 +163,7 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
         'Daily Reward on Cooldown',
         `You have already claimed your daily reward! Please return in approx. **${remainingHours} hours**.`
       );
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
 
     const embed = createCrystalEmbed(
@@ -222,5 +222,5 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
   }
 
   // Fallback
-  return interaction.reply({ content: 'Command processed.', ephemeral: true });
+  return interaction.reply({ content: 'Command processed.', flags: MessageFlags.Ephemeral });
 }

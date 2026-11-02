@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const database_1 = require("@crystalaid/database");
+const config_1 = require("@crystalaid/config");
 const commands_1 = require("./commands");
 const deployCommands_1 = require("./deployCommands");
+const crystalEmbed_1 = require("./embeds/crystalEmbed");
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../../.env') });
 const token = process.env.DISCORD_BOT_TOKEN;
 async function startBot() {
@@ -28,6 +31,36 @@ async function startBot() {
         await (0, deployCommands_1.deployCommands)();
     });
     client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
+        // 1. Button interactions (e.g. Quick Stats)
+        if (interaction.isButton()) {
+            if (interaction.customId === 'btn_quick_stats') {
+                try {
+                    const targetGuildId = interaction.guildId || '1100000000000000001';
+                    const dbUser = await database_1.prisma.user.findUnique({
+                        where: { discordId: interaction.user.id },
+                        include: {
+                            guildMembers: {
+                                where: { guild: { discordGuildId: targetGuildId } },
+                            },
+                        },
+                    });
+                    if (!dbUser || !dbUser.guildMembers[0]) {
+                        const embed = (0, crystalEmbed_1.createCrystalEmbed)('Profile Not Initialized', 'Launch the Activity to start earning XP and crystals!');
+                        return interaction.reply({ embeds: [embed], flags: discord_js_1.MessageFlags.Ephemeral });
+                    }
+                    const member = dbUser.guildMembers[0];
+                    const prog = (0, config_1.calculateLevelProgression)(member.xp);
+                    const embed = (0, crystalEmbed_1.createCrystalEmbed)(`${interaction.user.username}'s Quick Stats`, `⚡ **Level ${member.level}** (${prog.progressPercent}% to Lvl ${member.level + 1})\n💎 **Total XP:** ${member.xp.toLocaleString()}\n🔥 **Streak:** ${member.currentStreak} Days\n🔷 **Crystals:** ${dbUser.coins.toLocaleString()}`);
+                    return interaction.reply({ embeds: [embed], flags: discord_js_1.MessageFlags.Ephemeral });
+                }
+                catch (btnErr) {
+                    console.error('Error handling button interaction:', btnErr);
+                    return interaction.reply({ content: 'Could not fetch your stats right now.', flags: discord_js_1.MessageFlags.Ephemeral });
+                }
+            }
+            return;
+        }
+        // 2. Slash command interactions
         if (!interaction.isChatInputCommand())
             return;
         try {
@@ -36,10 +69,10 @@ async function startBot() {
         catch (error) {
             console.error('Error executing interaction:', error);
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+                await interaction.followUp({ content: 'There was an error while executing this command!', flags: discord_js_1.MessageFlags.Ephemeral });
             }
             else {
-                await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                await interaction.reply({ content: 'There was an error while executing this command!', flags: discord_js_1.MessageFlags.Ephemeral });
             }
         }
     });
