@@ -1,8 +1,10 @@
-# Lounge 11 — Discord Bot + Discord Activity + Ecosystem
+# CrystalAid — Discord Bot + Discord Activity + Real-time Gamification Ecosystem
 
-![Lounge 11 Banner](https://raw.githubusercontent.com/discord/discord-api-docs/master/assets/discord-banner.png)
+<p align="center">
+  <img src="assets/crystalaid-logo.png" alt="CrystalAid Logo" width="180" />
+</p>
 
-> **Lounge 11** is an all-in-one, Discord-native digital product ecosystem combining a **Discord Bot**, **Discord Activity (Mini App)**, **Real-Time Backend**, **Relational Database**, and a **Cyberpunk-inspired UI/UX Design System**.
+> **CrystalAid** is an all-in-one, Discord-native digital product ecosystem combining a **Discord Bot**, **Discord Activity (Mini App)**, **Real-Time WebSocket Backend**, **PostgreSQL Database**, and a **Crystalline Cyberpunk UI/UX Design System**.
 
 ---
 
