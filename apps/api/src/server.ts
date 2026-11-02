@@ -52,7 +52,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Health Check
-app.get('/health', async (req, res) => {
+app.get(['/health', '/api/health'], async (req, res) => {
   let dbStatus = 'disconnected';
   try {
     await prisma.$queryRaw`SELECT 1`;
