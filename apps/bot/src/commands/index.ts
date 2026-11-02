@@ -47,7 +47,8 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
   if (commandName === 'activity') {
     const embed = createCrystalEmbed(
       'CrystalAid Virtual Lounge',
-      'Step into the Crystal Lounge! Earn XP, level up, unlock cosmetics, and join live focus sessions directly inside Discord.'
+      'Step into the Crystal Lounge! Earn XP, level up, unlock cosmetics, and join live focus sessions directly inside Discord.',
+      true
     );
     embed.addFields(
       { name: '🔥 Current Streak', value: 'Check your rewards in the app', inline: true },
@@ -74,7 +75,8 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
     if (!dbUser || !dbUser.guildMembers[0]) {
       const embed = createCrystalEmbed(
         'Profile Not Found',
-        `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`
+        `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`,
+        true
       );
       return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
@@ -142,7 +144,8 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
     if (!dbUser || !dbUser.guildMembers[0]) {
       const embed = createCrystalEmbed(
         'Welcome to CrystalAid',
-        'Launch the Activity first to initialize your account and claim daily crystals!'
+        'Launch the Activity first to initialize your account and claim daily crystals!',
+        true
       );
       return interaction.reply({
         embeds: [embed],
@@ -204,7 +207,8 @@ export async function handleCommand(interaction: ChatInputCommandInteraction) {
   if (commandName === 'help') {
     const embed = createCrystalEmbed(
       'CrystalAid Command Directory',
-      'Here are all available commands in the CrystalAid ecosystem:'
+      'Here are all available commands in the CrystalAid ecosystem:',
+      true
     );
     embed.addFields(
       { name: '`/activity`', value: 'Launch the interactive Activity Mini App' },

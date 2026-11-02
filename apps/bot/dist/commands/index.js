@@ -37,7 +37,7 @@ async function handleCommand(interaction) {
     const { commandName, guildId, user } = interaction;
     const targetGuildId = guildId || '1100000000000000001';
     if (commandName === 'activity') {
-        const embed = (0, crystalEmbed_1.createCrystalEmbed)('CrystalAid Virtual Lounge', 'Step into the Crystal Lounge! Earn XP, level up, unlock cosmetics, and join live focus sessions directly inside Discord.');
+        const embed = (0, crystalEmbed_1.createCrystalEmbed)('CrystalAid Virtual Lounge', 'Step into the Crystal Lounge! Earn XP, level up, unlock cosmetics, and join live focus sessions directly inside Discord.', true);
         embed.addFields({ name: '🔥 Current Streak', value: 'Check your rewards in the app', inline: true }, { name: '🔷 XP Multiplier', value: '1.0x Server Rate', inline: true });
         return interaction.reply({
             embeds: [embed],
@@ -55,7 +55,7 @@ async function handleCommand(interaction) {
             },
         });
         if (!dbUser || !dbUser.guildMembers[0]) {
-            const embed = (0, crystalEmbed_1.createCrystalEmbed)('Profile Not Found', `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`);
+            const embed = (0, crystalEmbed_1.createCrystalEmbed)('Profile Not Found', `${targetUser.username} hasn't joined a CrystalAid session yet! Launch the Activity to begin.`, true);
             return interaction.reply({ embeds: [embed], flags: discord_js_1.MessageFlags.Ephemeral });
         }
         const member = dbUser.guildMembers[0];
@@ -98,7 +98,7 @@ async function handleCommand(interaction) {
             },
         });
         if (!dbUser || !dbUser.guildMembers[0]) {
-            const embed = (0, crystalEmbed_1.createCrystalEmbed)('Welcome to CrystalAid', 'Launch the Activity first to initialize your account and claim daily crystals!');
+            const embed = (0, crystalEmbed_1.createCrystalEmbed)('Welcome to CrystalAid', 'Launch the Activity first to initialize your account and claim daily crystals!', true);
             return interaction.reply({
                 embeds: [embed],
                 components: [(0, crystalEmbed_1.createActivityLaunchButton)()],
@@ -132,7 +132,7 @@ async function handleCommand(interaction) {
         return interaction.reply({ embeds: [embed] });
     }
     if (commandName === 'help') {
-        const embed = (0, crystalEmbed_1.createCrystalEmbed)('CrystalAid Command Directory', 'Here are all available commands in the CrystalAid ecosystem:');
+        const embed = (0, crystalEmbed_1.createCrystalEmbed)('CrystalAid Command Directory', 'Here are all available commands in the CrystalAid ecosystem:', true);
         embed.addFields({ name: '`/activity`', value: 'Launch the interactive Activity Mini App' }, { name: '`/profile [@user]`', value: 'Inspect member rank, level, and equipped frame' }, { name: '`/leaderboard`', value: 'View top server ranks and podium standings' }, { name: '`/rewards` / `/daily`', value: 'Check and claim your daily streak crystals' }, { name: '`/stats`', value: 'Server activity telemetry and totals' }, { name: '`/settings`', value: 'Server configuration for moderators and administrators' });
         return interaction.reply({
             embeds: [embed],
