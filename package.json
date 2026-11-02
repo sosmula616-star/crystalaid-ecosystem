@@ -1,0 +1,32 @@
+{
+  "name": "crystalaid",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CrystalAid - Discord Bot + Activity + Backend + Realtime Gamification Ecosystem",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:activity": "npm run dev --workspace=apps/activity",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:bot": "npm run dev --workspace=apps/bot",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "db:generate": "npm run generate --workspace=packages/database",
+    "db:push": "npm run push --workspace=packages/database",
+    "db:seed": "npm run seed --workspace=packages/database",
+    "db:setup": "npm run db:generate && npm run db:push && npm run db:seed"
+  },
+  "keywords": [
+    "discord",
+    "discord-activity",
+    "discord-bot",
+    "embedded-app-sdk",
+    "react",
+    "express"
+  ],
+  "author": "Lounge 11 Team",
+  "license": "MIT"
+}
