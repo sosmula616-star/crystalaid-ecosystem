@@ -8,11 +8,15 @@
     "apps/*"
   ],
   "scripts": {
+    "start": "node apps/api/dist/server.js",
+    "postinstall": "npm run build",
+    "build": "npm run build:packages && npm run build:apps",
+    "build:packages": "npm run db:generate && npm run build --workspace=packages/types && npm run build --workspace=packages/config && npm run build --workspace=packages/database",
+    "build:apps": "npm run build --workspace=apps/activity && npm run build --workspace=apps/api && npm run build --workspace=apps/bot",
     "dev": "npm run dev --workspaces --if-present",
     "dev:activity": "npm run dev --workspace=apps/activity",
     "dev:api": "npm run dev --workspace=apps/api",
     "dev:bot": "npm run dev --workspace=apps/bot",
-    "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "db:generate": "npm run generate --workspace=packages/database",
     "db:push": "npm run push --workspace=packages/database",

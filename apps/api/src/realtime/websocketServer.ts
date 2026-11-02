@@ -1,6 +1,6 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import http from 'http';
-import { WsServerMessage } from '@crystalaid/types';
+import type { WsServerMessage } from '@crystalaid/types';
 
 interface ClientConnection {
   ws: WebSocket;

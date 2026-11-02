@@ -1,6 +1,6 @@
 import { prisma } from '@crystalaid/database';
 import { calculateLevelProgression, APP_CONFIG } from '@crystalaid/config';
-import { UserProfile, Role } from '@crystalaid/types';
+import type { UserProfile, Role } from '@crystalaid/types';
 
 export const userService = {
   getProfile: async (userId: string, guildId: string): Promise<UserProfile> => {

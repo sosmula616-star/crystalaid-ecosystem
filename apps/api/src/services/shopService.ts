@@ -1,5 +1,5 @@
 import { prisma } from '@crystalaid/database';
-import { ShopCatalogItem, ShopCategory, Rarity } from '@crystalaid/types';
+import type { ShopCatalogItem, ShopCategory, Rarity } from '@crystalaid/types';
 
 export const shopService = {
   getCatalog: async (userId: string): Promise<ShopCatalogItem[]> => {

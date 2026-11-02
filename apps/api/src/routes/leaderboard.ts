@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { prisma } from '@crystalaid/database';
 import { authGuard, AuthenticatedRequest } from '../middleware/auth';
-import { LeaderboardEntry } from '@crystalaid/types';
+import type { LeaderboardEntry } from '@crystalaid/types';
 
 const router = Router();
 

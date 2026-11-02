@@ -1,6 +1,6 @@
 import { prisma } from '@crystalaid/database';
 import { APP_CONFIG, calculateLevelProgression } from '@crystalaid/config';
-import { ActivityType } from '@crystalaid/types';
+import type { ActivityType } from '@crystalaid/types';
 
 interface ActiveSessionMemory {
   sessionId: string;

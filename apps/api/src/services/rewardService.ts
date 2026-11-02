@@ -1,6 +1,6 @@
 import { prisma } from '@crystalaid/database';
 import { APP_CONFIG, calculateLevelProgression } from '@crystalaid/config';
-import { DailyRewardItem } from '@crystalaid/types';
+import type { DailyRewardItem } from '@crystalaid/types';
 
 export const rewardService = {
   getDailyStatus: async (userId: string, guildId: string) => {

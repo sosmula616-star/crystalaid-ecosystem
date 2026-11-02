@@ -1,4 +1,4 @@
-import { AchievementItem, ShopCatalogItem, GuildCommunityEvent } from '@crystalaid/types';
+import type { AchievementItem, ShopCatalogItem, GuildCommunityEvent } from '@crystalaid/types';
 
 export const APP_CONFIG = {
   name: 'CrystalAid',

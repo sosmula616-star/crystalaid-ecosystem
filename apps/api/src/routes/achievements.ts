@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { prisma } from '@crystalaid/database';
 import { authGuard, AuthenticatedRequest } from '../middleware/auth';
-import { AchievementItem, AchievementCategory, Rarity } from '@crystalaid/types';
+import type { AchievementItem, AchievementCategory, Rarity } from '@crystalaid/types';
 
 const router = Router();
 

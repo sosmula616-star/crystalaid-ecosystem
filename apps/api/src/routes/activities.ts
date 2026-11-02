@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { xpService } from '../services/xpService';
 import { authGuard, AuthenticatedRequest } from '../middleware/auth';
-import { ActivityType } from '@crystalaid/types';
+import type { ActivityType } from '@crystalaid/types';
 import { broadcastToGuild } from '../realtime/websocketServer';
 
 const router = Router();
