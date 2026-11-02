@@ -2,7 +2,7 @@ import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'disc
 
 export const CRYSTAL_BRAND_COLOR = 0x38bdf8; // Glacial cyan
 
-const DEFAULT_ACTIVITY_URL = 'https://noievroninoravoniaseofioerfovarnoonvavraonirvwjifvediopnosdvonWEFPJQ.bothost.tech';
+const DEFAULT_ACTIVITY_URL = 'https://crystalaid-app.bothost.tech';
 
 export function getAppUrl(): string {
   let rawUrl = (process.env.APP_URL || process.env.APP_DOMAIN || DEFAULT_ACTIVITY_URL).trim();
